@@ -1,7 +1,9 @@
 # Netlify redirects file
 
-# API Proxy to Railway Backend
-/api/*  https://goodtext-api-production.railway.app/api/:splat  200
+# API Routes to Netlify Functions
+/api/health /.netlify/functions/health 200
+/api/clean /.netlify/functions/clean 200
+/api/languages /.netlify/functions/languages 200
 
 # Force HTTPS
 https://goodtext.netlify.app/* https://goodtext.netlify.app/:splat 301!
