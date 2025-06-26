@@ -18,11 +18,14 @@ app = FastAPI(
 )
 
 # CORS middleware to allow frontend requests
+import os
+cors_origins = os.getenv("CORS_ORIGINS", "https://goodtext-ai-cleaner.netlify.app,http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 

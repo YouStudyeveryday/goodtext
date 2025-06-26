@@ -12,7 +12,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://goodtext-api.railway.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://goodtext-api.railway.app https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://web-production-48815.up.railway.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://web-production-48815.up.railway.app https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net"
 
 # API代理到Railway后端
 [[redirects]]
@@ -72,4 +72,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google https://googleads.g.doubleclick.net; frame-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com" 
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://partner.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com https://ep1.adtrafficquality.google https://googleads.g.doubleclick.net https://web-production-48815.up.railway.app; frame-src 'self' https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com" 

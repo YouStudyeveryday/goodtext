@@ -20,14 +20,15 @@ class GoodTextAPI {
     getApiUrl() {
         // Netlify前端连接Railway后端
         if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('netlify.com')) {
-            return 'https://web-production-48815.up.railway.app';
+            // 使用Netlify代理API请求到Railway
+            return window.location.origin + '/api';
         }
         // 本地开发环境
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             return 'http://localhost:8000';
         }
-        // 默认使用Railway API
-        return 'https://web-production-48815.up.railway.app';
+        // 默认使用Netlify代理
+        return window.location.origin + '/api';
     }
     
     async cleanText(text, options = {}, language = null) {
