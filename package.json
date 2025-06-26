@@ -1,0 +1,21 @@
+{
+  "name": "goodtext-cleaner",
+  "version": "2.0.0",
+  "description": "Free AI Text Cleaner Tool - Advanced multi-language text formatting",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Build complete'",
+    "start": "echo 'Starting server'"
+  },
+  "keywords": [
+    "text cleaner",
+    "ai text formatter",
+    "pdf text fix",
+    "markdown cleaner",
+    "text processing"
+  ],
+  "author": "GoodText Team",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+} 

@@ -1,0 +1,12 @@
+# Netlify redirects file
+# Force HTTPS
+https://goodtext.netlify.app/* https://goodtext.netlify.app/:splat 301!
+
+# SPA fallback
+/*    /index.html   200
+
+# SEO-friendly redirects
+/text-cleaner /  301
+/ai-text-cleaner /  301
+/chatgpt-text-cleaner /  301
+/pdf-text-cleaner /  301 
