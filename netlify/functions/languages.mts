@@ -1,5 +1,6 @@
-// Netlify Serverless Function - Supported Languages
-exports.handler = async (event, context) => {
+import type { Context, Config } from "@netlify/functions";
+
+export default async (req: Request, context: Context) => {
   // Set CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -9,12 +10,11 @@ exports.handler = async (event, context) => {
   };
 
   // Handle preflight requests
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
+  if (req.method === 'OPTIONS') {
+    return new Response('', {
+      status: 200,
+      headers
+    });
   }
 
   // Supported languages
@@ -140,9 +140,12 @@ exports.handler = async (event, context) => {
     last_updated: '2025-01-26'
   };
 
-  return {
-    statusCode: 200,
-    headers,
-    body: JSON.stringify(response)
-  };
+  return new Response(JSON.stringify(response), {
+    status: 200,
+    headers
+  });
+};
+
+export const config: Config = {
+  path: "/api/languages"
 }; 

@@ -1,5 +1,6 @@
-// Netlify Serverless Function - Health Check
-exports.handler = async (event, context) => {
+import type { Context, Config } from "@netlify/functions";
+
+export default async (req: Request, context: Context) => {
   // Set CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -9,12 +10,11 @@ exports.handler = async (event, context) => {
   };
 
   // Handle preflight requests
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
+  if (req.method === 'OPTIONS') {
+    return new Response('', {
+      status: 200,
+      headers
+    });
   }
 
   // Health check response
@@ -23,12 +23,15 @@ exports.handler = async (event, context) => {
     version: '1.0.0',
     timestamp: new Date().toISOString(),
     service: 'GoodText API',
-    uptime: process.uptime()
+    platform: 'Netlify Functions'
   };
 
-  return {
-    statusCode: 200,
-    headers,
-    body: JSON.stringify(healthData)
-  };
+  return new Response(JSON.stringify(healthData), {
+    status: 200,
+    headers
+  });
+};
+
+export const config: Config = {
+  path: "/api/health"
 }; 

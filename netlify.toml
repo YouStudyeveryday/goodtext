@@ -18,21 +18,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net"
 
-# API Functions
-[[redirects]]
-  from = "/api/health"
-  to = "/.netlify/functions/health"
-  status = 200
-
-[[redirects]]
-  from = "/api/clean"
-  to = "/.netlify/functions/clean"
-  status = 200
-
-[[redirects]]
-  from = "/api/languages"
-  to = "/.netlify/functions/languages"
-  status = 200
+# API Functions are handled automatically with config paths
 
 # SPA fallback (excluding API routes)
 [[redirects]]

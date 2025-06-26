@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'Build complete'",
-    "start": "echo 'Starting server'"
+    "start": "echo 'Starting server'",
+    "dev": "netlify dev",
+    "test": "python test_api.py"
   },
   "keywords": [
     "text cleaner",
@@ -17,5 +19,9 @@
   "author": "GoodText Team",
   "license": "MIT",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "netlify-cli": "^17.0.0",
+    "@netlify/functions": "^2.6.0",
+    "typescript": "^5.3.0"
+  }
 } 
