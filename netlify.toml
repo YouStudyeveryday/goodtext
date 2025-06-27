@@ -7,7 +7,8 @@
   NODE_VERSION = "18"
 
 [functions]
-  node_bundler = "nft"
+  node_bundler = "esbuild"
+  external_node_modules = []
 
 [[headers]]
   for = "/*"
@@ -18,13 +19,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net"
 
-# API Functions are handled automatically with config paths
-
-# SPA fallback (excluding API routes)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Functions take priority over redirects automatically
 
 [[headers]]
   for = "*.html"

@@ -9,7 +9,6 @@
 https://goodtext.netlify.app/* https://goodtext.netlify.app/:splat 301!
 
 # SPA fallback (exclude API routes)
-/api/* /api/:splat 200
 /*    /index.html   200
 
 # SEO-friendly redirects

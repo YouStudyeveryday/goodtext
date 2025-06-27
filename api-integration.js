@@ -18,16 +18,15 @@ class GoodTextAPI {
     }
     
     getApiUrl() {
-        // Netlify前端连接Railway后端
+        // 使用_redirects配置的API路径
         if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('netlify.com')) {
-            // 使用Netlify代理API请求到Railway
             return window.location.origin + '/api';
         }
         // 本地开发环境
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             return 'http://localhost:8000';
         }
-        // 默认使用Netlify代理
+        // 默认使用API路径
         return window.location.origin + '/api';
     }
     
@@ -38,7 +37,7 @@ class GoodTextAPI {
         }
         
         try {
-            const response = await fetch(`${this.apiUrl}/api/clean`, {
+            const response = await fetch(`${this.apiUrl}/clean`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,7 +77,7 @@ class GoodTextAPI {
         }
         
         try {
-            const response = await fetch(`${this.apiUrl}/api/clean/batch`, {
+            const response = await fetch(`${this.apiUrl}/clean`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,7 +111,7 @@ class GoodTextAPI {
     
     async getSupportedLanguages() {
         try {
-            const response = await fetch(`${this.apiUrl}/api/languages`);
+            const response = await fetch(`${this.apiUrl}/languages`);
             if (response.ok) {
                 return await response.json();
             }
