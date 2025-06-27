@@ -400,6 +400,8 @@
     <script src="api-integration.js"></script>
 </head>
 <body>
+    <!-- Notification container -->
+    <div id="notification" class="notification"></div>
     
     <div class="container">
         <header class="header">
@@ -897,6 +899,54 @@ No character limit, completely free!"
             }
         }
         
+        // Enhanced text cleaning function (called by button)
+        function enhancedCleanText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputElement = document.getElementById('outputText');
+            const cleanBtn = document.getElementById('cleanBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const loading = document.getElementById('loading');
+            
+            if (!inputText.trim()) {
+                showNotification('Please enter some text to clean', 'error');
+                return;
+            }
+            
+            // Show loading
+            loading.style.display = 'block';
+            cleanBtn.disabled = true;
+            
+            // Simulate processing delay for better UX
+            setTimeout(() => {
+                const result = performTextCleaning(inputText);
+                
+                outputElement.value = result.cleanedText;
+                copyBtn.disabled = false;
+                
+                // Show statistics
+                showProcessStats(result.stats);
+                
+                // Update counter
+                updateTotalProcessed();
+                
+                // Hide loading
+                loading.style.display = 'none';
+                cleanBtn.disabled = false;
+                
+                // Show success notification
+                const saved = result.stats.savedChars;
+                showNotification(`Text cleaned! Saved ${saved} characters.`, 'success');
+                
+                // Track event
+                trackUserAction('text_cleaned', {
+                    original_length: result.stats.originalLength,
+                    saved_chars: saved
+                });
+                
+                console.log('Text cleaning completed:', result.stats);
+            }, 100);
+        }
+
         // Enhanced text cleaning algorithm
         function performTextCleaning(text) {
             if (!text || text.length === 0) {
@@ -1001,6 +1051,52 @@ No character limit, completely free!"
             };
         }
         
+        // Preset functions for different modes
+        function presetAI() {
+            // Set optimal settings for AI-generated text
+            document.getElementById('removeSpaces').checked = true;
+            document.getElementById('fixLineBreaks').checked = true;
+            document.getElementById('removeEmptyLines').checked = true;
+            document.getElementById('fixHyphenation').checked = true;
+            document.getElementById('normalizePunctuation').checked = true;
+            document.getElementById('normalizeQuotes').checked = true;
+            document.getElementById('removeHtml').checked = false;
+            document.getElementById('removeMarkdown').checked = true;
+            document.getElementById('fixAiArtifacts').checked = true;
+            
+            showNotification('AI模式预设已应用 / AI preset applied', 'success');
+        }
+        
+        function presetPDF() {
+            // Set optimal settings for PDF copied text
+            document.getElementById('removeSpaces').checked = true;
+            document.getElementById('fixLineBreaks').checked = true;
+            document.getElementById('removeEmptyLines').checked = true;
+            document.getElementById('fixHyphenation').checked = true;
+            document.getElementById('normalizePunctuation').checked = true;
+            document.getElementById('normalizeQuotes').checked = true;
+            document.getElementById('removeHtml').checked = false;
+            document.getElementById('removeMarkdown').checked = false;
+            document.getElementById('fixAiArtifacts').checked = false;
+            document.getElementById('fixEncoding').checked = true;
+            
+            showNotification('PDF预设已应用 / PDF preset applied', 'success');
+        }
+        
+        // Toggle advanced options
+        function toggleAdvancedOptions() {
+            const content = document.getElementById('advancedOptionsContent');
+            const toggle = document.getElementById('optionsToggle');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                toggle.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+
         // Show processing statistics
         function showProcessStats(stats) {
             const statsContent = `
@@ -1095,6 +1191,14 @@ No character limit, completely free!"
                 document.getElementById('inputText').value = draft;
             }
         });
+        
+        // Track user actions for analytics
+        function trackUserAction(action, data) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, data);
+            }
+            console.log('Action tracked:', action, data);
+        }
         
         // Lazy load ads
         setTimeout(() => {
